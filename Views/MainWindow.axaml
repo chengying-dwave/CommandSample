@@ -46,5 +46,34 @@
 			<Button Command="{Binding OpenThePodBayDoorsAsyncCommand}"
         			Content="Start Pod Bay Opening Sequence" />
 		</StackPanel>
+		<Separator Grid.Row="1" Grid.ColumnSpan="2"
+				   HorizontalAlignment="Stretch"
+				   Margin="5"
+				   Height="2"
+				   Background="LightGray" />
+
+		<TextBlock Grid.Column="0" Grid.Row="2"
+			       Text="HAL9000:"
+				   FontWeight="Bold"
+		           Margin="5"
+		           VerticalAlignment="Center" />
+
+		<!-- This is the area where the output of HAL9000 is rendered -->
+		<Border Grid.Column="1" Grid.Row="2"
+				CornerRadius="10" Margin="5"
+			    BorderThickness="1" BorderBrush="{DynamicResource SystemAccentColor}">
+			<Grid ColumnDefinitions="*,Auto">
+				<ItemsControl Margin="5"
+                              ItemsSource="{Binding ConversationLog}" />
+
+				<!-- This button will clear the recent conversation log-->
+				<!-- which is not supported via CompiledBinding.                                 -->
+				<Button Grid.Column="1"
+						VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+						Background="Transparent"
+						Command="{Binding ConversationLog.Clear}"
+						Content="❌" />
+			</Grid>
+		</Border>
 	</Grid>
 </Window>
