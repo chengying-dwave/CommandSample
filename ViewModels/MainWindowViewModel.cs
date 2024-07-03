@@ -1,8 +1,17 @@
-﻿namespace CommandSample.ViewModels;
+﻿using System.Collections.ObjectModel;
+
+namespace CommandSample.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    /// <summary>
+    ///  This collection will store what the computer said
+    /// </summary>
+    public ObservableCollection<string> ConversationLog { get; } = new ObservableCollection<string>();
+
+    // Just a helper to add content to ConversationLog
+    private void AddToConvo(string content)
+    {
+        ConversationLog.Add(content);
+    }
 }
