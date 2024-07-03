@@ -1,10 +1,16 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using ReactiveUI;
 
 namespace CommandSample.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    /// <summary>
+    /// This command will ask HAL-9000 to open the pod bay doors
+    /// </summary>
+    public ICommand OpenThePodBayDoorsDirectCommand { get; }
+
     private string? _RobotName;
 
     /// <summary>
