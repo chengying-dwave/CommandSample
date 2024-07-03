@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ReactiveUI;
 
@@ -30,6 +31,11 @@ public class MainWindowViewModel : ViewModelBase
     public ICommand OpenThePodBayDoorsFellowRobotCommand { get; }
 
     /// <summary>
+    /// This command will start an async task for the multi-step Pod bay opening sequence
+    /// </summary>
+    public ICommand OpenThePodBayDoorsAsyncCommand { get; }
+
+    /// <summary>
     ///  This collection will store what the computer said
     /// </summary>
     public ObservableCollection<string> ConversationLog { get; } = new ObservableCollection<string>();
@@ -46,6 +52,9 @@ public class MainWindowViewModel : ViewModelBase
 
         OpenThePodBayDoorsFellowRobotCommand =
             ReactiveCommand.Create<string?>(name => OpenThePodBayDoorsFellowRobot(name), canExecuteFellowRobotCommand);
+
+        // Init OpenThePodBayDoorsAsyncCommand
+        OpenThePodBayDoorsAsyncCommand = ReactiveCommand.CreateFromTask(OpenThePodBayDoorsAsync);
     }
 
     // The method that will be executed when the command is invoked
@@ -59,6 +68,26 @@ public class MainWindowViewModel : ViewModelBase
     {
         ConversationLog.Clear();
         AddToConvo($"Hello {robotName}, the Pod Bay is open :-)");
+    }
+
+    // This method is an async Task because opening the pod bay doors can take long time.
+    // We don't want our UI to become unresponsive.
+    private async Task OpenThePodBayDoorsAsync()
+    {
+        ConversationLog.Clear();
+        AddToConvo("Preparing to open the Pod Bay...");
+        // wait a second
+        await Task.Delay(1000);
+
+        AddToConvo("Depressurizing Airlock...");
+        // wait 2 seconds
+        await Task.Delay(2000);
+
+        AddToConvo("Retracting blast doors...");
+        // wait 2 more seconds
+        await Task.Delay(2000);
+
+        AddToConvo("Pod Bay is open to space!");
     }
 
     // Just a helper to add content to ConversationLog
