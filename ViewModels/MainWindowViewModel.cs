@@ -27,6 +27,12 @@ public class MainWindowViewModel : ViewModelBase
     /// </summary>
     public ObservableCollection<string> ConversationLog { get; } = new ObservableCollection<string>();
 
+    public MainWindowViewModel()
+    {
+        // Init OpenThePodBayDoorsDirectCommand
+        OpenThePodBayDoorsDirectCommand = ReactiveCommand.Create(OpenThePodBayDoors);
+    }
+
     // The method that will be executed when the command is invoked
     private void OpenThePodBayDoors()
     {
