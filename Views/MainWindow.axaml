@@ -15,6 +15,8 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <!-- This button will ask HAL to open the doors -->
+    <Button Command="{Binding OpenThePodBayDoorsDirectCommand}"
+                    Content="Open the pod bay doors, HAL." />
 
 </Window>
