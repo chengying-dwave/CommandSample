@@ -39,6 +39,12 @@
                         Content="{Binding RobotName, StringFormat='Open the Pod Bay for {0}'}"
                         CommandParameter="{Binding RobotName}" />
 			</StackPanel>
+
+			<!-- This button will ask start a multi-step sequence to open the doors -->
+			<!-- As this is a long operation, the command is async.-->
+			<!-- HAL inform us about the current progress of the doors.-->
+			<Button Command="{Binding OpenThePodBayDoorsAsyncCommand}"
+        			Content="Start Pod Bay Opening Sequence" />
 		</StackPanel>
 	</Grid>
 </Window>
