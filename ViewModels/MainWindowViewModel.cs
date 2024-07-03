@@ -18,6 +18,13 @@ public class MainWindowViewModel : ViewModelBase
     /// </summary>
     public ObservableCollection<string> ConversationLog { get; } = new ObservableCollection<string>();
 
+    // The method that will be executed when the command is invoked
+    private void OpenThePodBayDoors()
+    {
+        ConversationLog.Clear();
+        AddToConvo("I'm sorry, Dave, I'm afraid I can't do that.");
+    }
+
     // Just a helper to add content to ConversationLog
     private void AddToConvo(string content)
     {
